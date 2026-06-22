@@ -9,7 +9,7 @@ class Perceptron(object):
     def train(self, X, y):
         self.w_ = np.random.rand(1 + X.shape[1])
         
-        self.errors = []
+        self.errors_ = []
 
         for _ in range(self.epochs):
             errors = 0
@@ -18,7 +18,7 @@ class Perceptron(object):
                 self.w_[:-1] -= update * xi
                 self.w_[-1] -= update
                 errors += int(update != 0)
-            self.errors.append(errors)
+            self.errors_.append(errors)
         return self
 
     def net_input(self, X):

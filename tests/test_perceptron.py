@@ -35,4 +35,4 @@ def test_errors_recorded_each_epoch():
     model = Perceptron(epochs=epochs)
     model.train(X, y)
 
-    assert len(model.errors) == epochs
+    assert len(model.errors_) == epochs
