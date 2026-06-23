@@ -34,6 +34,38 @@ class NeuralNet:
 
         X = np.asarray(X, dtype=float)
 
+        # First layer --> Second layer
+        # Matrix dims: (n x 784) * (784 x 16) + (16, ) = (n x 16)
+
+        self.Z1 =  X @ self.W1 + self.b1
+        self.A1 = sigmoid(self.Z1)
+
+        # Second layer --> Third layer
+        # Matrix dims: (n x 16) * (16 x 16) + (16, ) = (n x 16)
+
+        self.Z2 = self.A1 @ self.W2 + self.b2
+        self.A2 = sigmoid(self.Z2)
+
+        # Third layer --> Output
+        # Matrix dims: (n x 16) * (16 x 10) + (10, ) = (n x 10)
+
+        self.Z3 = self.A2 @ self.W3 + self.b3
+        self.Out_Matrix = softmax(self.Z3)
+
+        # Returns (n x 10) matrix of probabilities that sum to 1
+
+        return self.Out_Matrix
+    
+    def predictMNIST(self, X):
+
+        # Uses forwardprop to predict X assuming X is in the MNIST dataset and returns a number from 0-9
+
+        probs = self.forwardprop(X)
+        return np.argmax(probs, axis = 1)
+
+
+
+
 
 
         
