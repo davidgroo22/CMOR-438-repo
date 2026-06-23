@@ -1,16 +1,19 @@
 import numpy as np
-from single_neuron import sigmoid
+
+def sigmoid(x):
+    return (1/(1+np.exp(-x)))
 
 def softmax(Z):
 
     # Shifts final weights to probabilities that add up to 1
+    # This method was suggested by Claude
 
     Z_shift = Z - np.max(Z, axis=1, keepdims=True)
     exp = np.exp(Z_shift)
     return exp / np.sum(exp, axis=1, keepdims=True)
 
 class NeuralNet:
-    def __init__(self, input_layer = 784, hidden_layer1 = 16, hidden_layer2 = 16, output_layer = 10):
+    def __init__(self, input_layer = 784, hidden_layer1 = 16, hidden_layer2 = 16, output_layer = 10, random_state = None):
         rng = np.random.default_rng(random_state)
 
         # Input layer to first hidden layer weights set to random and biases set to 0
