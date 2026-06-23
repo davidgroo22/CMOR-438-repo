@@ -36,3 +36,81 @@ def test_intermediates_are_stored():
     # stores them on self with the correct shapes.
     X = np.random.rand(5, 784)
     net = NeuralNet(random_state=0)
+
+def _make_tiny_dataset(n_per_class=8, seed=0):
+    """Helper: tiny, learnable dataset. 3 classes, clearly separated clusters
+    in 784-dim space so a working net can memorize them quickly."""
+    rng = np.random.default_rng(seed)
+    X_list, label_list = [], []
+    for cls in range(3):
+        # each class clustered around a different random center
+        center = rng.standard_normal(784) * 3
+        X_list.append(center + rng.standard_normal((n_per_class, 784)) * 0.1)
+        label_list.append(np.full(n_per_class, cls))
+    X = np.vstack(X_list)
+    labels = np.concatenate(label_list)
+    Y = np.zeros((len(labels), 10))
+    Y[np.arange(len(labels)), labels] = 1   # one-hot
+    return X, Y, labels
+
+
+def test_cost_decreases_during_training():
+    # The whole point of gradient descent: cost should drop over epochs.
+    X, Y, labels = _make_tiny_dataset()
+    net = NeuralNet(random_state=0)
+    net.train(X, Y, alpha=0.5, epochs=200)
+
+    assert net.costs[-1] < net.costs[0]
+
+
+def test_cost_history_length_matches_epochs():
+    # One cost recorded per epoch.
+    X, Y, labels = _make_tiny_dataset()
+    epochs = 50
+    net = NeuralNet(random_state=0)
+    net.train(X, Y, alpha=0.5, epochs=epochs)
+
+    assert len(net.costs) == epochs
+
+
+def test_learns_separable_data():
+    # On clearly separated clusters, a working net should reach high accuracy.
+    X, Y, labels = _make_tiny_dataset()
+    net = NeuralNet(random_state=0)
+    net.train(X, Y, alpha=0.5, epochs=2000)
+
+    accuracy = np.mean(net.predict(X) == labels)
+    assert accuracy > 0.9
+
+
+def test_weights_actually_change():
+    # Training must modify the weights. If backprop did nothing (e.g. all
+    # gradients zero), the weights would be unchanged -> bug.
+    X, Y, labels = _make_tiny_dataset()
+    net = NeuralNet(random_state=0)
+    W1_before = net.W1.copy()      # copy! otherwise it's the same array reference
+
+    net.train(X, Y, alpha=0.5, epochs=20)
+
+    assert not np.allclose(net.W1, W1_before)
+
+
+def test_cost_is_finite():
+    # No NaN/inf during training (catches blow-ups from a too-large alpha
+    # or a log(0) that slipped past the 1e-9 guard).
+    X, Y, labels = _make_tiny_dataset()
+    net = NeuralNet(random_state=0)
+    net.train(X, Y, alpha=0.5, epochs=100)
+
+    assert np.all(np.isfinite(net.costs))
+
+
+def test_overfits_tiny_dataset():
+    # A network with this much capacity SHOULD be able to perfectly memorize
+    # a handful of well-separated points. This is the strongest "it learns" check.
+    X, Y, labels = _make_tiny_dataset(n_per_class=4)
+    net = NeuralNet(random_state=0)
+    net.train(X, Y, alpha=0.5, epochs=1000)
+
+    accuracy = np.mean(net.predict(X) == labels)
+    assert accuracy == 1.0
