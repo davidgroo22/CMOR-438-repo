@@ -28,7 +28,9 @@ Listed below are the algorithms that are implemented in this repository
 9. K Means Clustering
 
 The first eight of the above algorithms are **Supervised Learning Algorithms** which means the data that they are trained on is already labeled allowing more effective training as the algorithm is able to determine how "correct" it is on its predictions. The final algorithm is an **Unsupervised Learning Algorithm** in which case the data is unlabeled and the algorithm is solely able to distinguish patterns within the features of the data.
+
 ---
+
 ## Programming Tools Used
 
 Python, Pandas, NumPy. Matplotlib, Seaborn, JupyterNotebook
