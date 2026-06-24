@@ -1,3 +1,6 @@
-# CMOR 438 — Machine Learning From Scratch
+## CMOR 438 — Data Science and Machine Learning
 
-Final project: a custom machine learning package implemented from scratch in NumPy, plus demonstration notebooks. Work in progress.
+**Author:** David Groothuis
+**Course:** Rice University - CMOR 438, Summer 2026, Dr. Randy Davila
+---
+This repository contains 
