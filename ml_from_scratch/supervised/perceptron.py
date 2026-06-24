@@ -1,6 +1,6 @@
 import numpy as np
 
-class Perceptron(object):
+class Perceptron():
 
     def __init__(self, eta = .5, epochs = 50):
         self.eta = eta
