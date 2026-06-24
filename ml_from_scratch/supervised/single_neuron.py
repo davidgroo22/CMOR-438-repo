@@ -8,9 +8,15 @@ def sigmoid(x):
 
 class SingleNeuron():
     def __init__(self, activation_function):
+
+        # Activation function is meant to be either the indentity or sigmoid for linear/logistic regression
+
         self.activation_function = activation_function
     
     def train(self, X, y, alpha = 0.005, epochs = 50):
+
+        # Trains the SingleNeuron model using gradient descent
+
         self.w_ = np.random.rand(1+X.shape[1])
         self.errors_ = []
         N = X.shape[0]
@@ -25,6 +31,9 @@ class SingleNeuron():
         return self
     
     def predict(self, X):
+
+        # Predicts a new classification based on old ones
+
         preactivation = np.dot(X, self.w_[:-1]) + self.w_[-1]
         return self.activation_function(preactivation)
     

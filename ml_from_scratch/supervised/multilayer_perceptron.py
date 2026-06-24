@@ -69,16 +69,15 @@ class NeuralNet:
 
 
     def backprop(self, Y, alpha):
-        # Y: one-hot labels, shape (n, 10). Call forwardprop(X) first so the
-        # intermediate values (self.X, self.A1, self.A2, self.A3) are cached.
+
+        # Utilizes the backpropogation method as displayed in the 3Blue1Brown video
+
         n = Y.shape[0]
 
-        # ---- deltas: output layer, then propagate backward ----
-        delta3 = self.Out_Matrix - Y                                       # (n, 10)
+        delta3 = self.Out_Matrix - Y                                      
         delta2 = (delta3 @ self.W3.T) * (self.A2 * (1 - self.A2))  # (n, 16)
         delta1 = (delta2 @ self.W2.T) * (self.A1 * (1 - self.A1))  # (n, 16)
 
-        # ---- gradients: (activation feeding in).T @ delta, averaged over batch ----
         dW3 = self.A2.T @ delta3 / n      # (16, 10)
         db3 = np.sum(delta3, axis=0) / n  # (10,)
         dW2 = self.A1.T @ delta2 / n      # (16, 16)
@@ -86,7 +85,6 @@ class NeuralNet:
         dW1 = self.X.T @ delta1 / n       # (784, 16)
         db1 = np.sum(delta1, axis=0) / n  # (16,)
 
-        # ---- update: step every parameter downhill ----
         self.W3 -= alpha * dW3
         self.b3 -= alpha * db3
         self.W2 -= alpha * dW2
@@ -96,6 +94,8 @@ class NeuralNet:
 
     def train(self, X, Y, alpha=0.5, epochs=100):
         
+        # Trains the model using the method outlined in the 3Blue1Brown video
+
         X = np.asarray(X, dtype=float)
         Y = np.asarray(Y, dtype=float)
         self.costs = []

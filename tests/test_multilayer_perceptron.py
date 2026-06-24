@@ -2,6 +2,7 @@ import numpy as np
 from ml_from_scratch.supervised.multilayer_perceptron import NeuralNet
 
 
+
 def test_forward_output_shape():
     # 5 images in -> output should be (5, 10): 5 rows of 10 digit-probabilities
     X = np.random.rand(5, 784)
