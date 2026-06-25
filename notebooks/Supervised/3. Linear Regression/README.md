@@ -23,3 +23,7 @@ Additionally my implementation in specific does this stochastically so each upda
 $$\frac{1}{2}\sum_{i=1}^n(\hat{y_i}-y_i)^2$$
 
 but note that this is almost exactly the cost function that we are minimizing. Because of this, the whole effect of gradient descent is effectively minimizing how "wrong" the model is which in turn, tends to it being pretty accurate after enough time.
+
+## Example on real data
+
+I will now demonstrate the linear regression method on a dataset including ten health related features and their correlation with diabetes progression in the people who the features apply to. I will do this in a jupyter notebook in this folder.
