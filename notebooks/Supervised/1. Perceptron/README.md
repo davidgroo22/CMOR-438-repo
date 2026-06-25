@@ -18,7 +18,7 @@ The value of $\hat{y}$ is the prediction that is given by the Perceptron, howeve
 
 $$\vec{w} \leftarrow \vec{w} + \eta (l - \hat{y})\vec{x}$$ and $$b \leftarrow b + \eta(l - \hat{y})$$
 
-where $\vec{w}$ is the weight vector, $\eta$ is a chosen learning rate (we mostly used 0.5 in this class), $\vec{x}$ is the vector of the $x_i$ and $l$ is the correct value assigned to the label of the data point. Note that the closer that $l$ is to $\hat{y},$ the less the model needs to update itself. Because of this, with enough reasonable data, the model will tend towards being more and more accurate. This is how the Perceptron is able to learn specific datasets and use that to predict future data.
+where $\vec{w}$ is the weight vector, $\eta$ is a chosen learning rate (we mostly used 0.5 in this class), $\vec{x}$ is the vector of the $x_i$ and $l$ is the correct value assigned to the label of the data point. Note that the closer that $l$ is to $\hat{y},$ the less the model needs to update itself. Because of this, with enough reasonable data, the model will tend towards being more and more accurate. The algorithm however determines a line separating the data, so if the data is not "linearly separable" that is if the data cannot be separated into classes by a line, the perceptron will never become 100% accurate.
 
 ---
 
