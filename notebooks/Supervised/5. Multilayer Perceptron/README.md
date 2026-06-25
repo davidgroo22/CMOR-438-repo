@@ -32,5 +32,26 @@ $$\delta_3 = \hat{Y} - Y$$
 
 Where $\hat{Y}$ are the prediction values and $Y$ are the real values. Now we are able to calculate the previous deltas with the formula
 
-$$\delta^{(\ell)} = \left(\delta^{(\ell+1)} {W^{(\ell+1)}}^{T}\right) \odot \sigma'(Z^{(\ell)})$$
+$$\delta_n = \left(\delta_{n+1} {W_{(n+1)}}^{T}\right) \odot \sigma'(Z_{n})$$
 
+Note that $W_n, Z_n$ are defined above and the $\odot$ denotes elementwise multiplication retaining the shape of the matrix. Now once we are able to calculate $\delta_1, \delta_2, $ and $\delta_3$ we are then able to calculate the gradient of the cost of a certain layer. We scale this by the error to effectively fix the layers that are the most wrong the quickest. We do this by taking
+
+$$\frac{\partial C}{\partial W_{n}} = \frac{1}{k} {A_{n-1}}^{T} \delta_{n}$$
+
+as well as taking the gradiant of the bias to be
+
+$$\frac{\partial C}{\partial B_{n}} = \frac{1}{k}\sum_{datapoints} \delta_{n}$$
+
+Once we have found the gradients of each layer, we are able to update the weights and biases of each layer similarly to how we do in a single perceptron. We pick a learning rate $\eta$ to scale our steps and then we apply the following changes to each set of weights and biases:
+
+$$W_n \leftarrow W_n - \eta \frac{\partial C}{\partial W_n}$$
+
+$$B_n \leftarrow B_n - \eta \frac{\partial C}{\partial B_n}$$
+
+Once we have done this, we have effectively decreased the cost function as we have subtracted the negative gradient or "stepped in the steepest downhill direction." That sums up the entire learning step, so now we iterate through sets of data in order to train our model. We repeat this process for a chosen number of epochs until the model is sufficiently trained.
+
+---
+
+## Testing on real data
+
+This model is much more powerful than a lot of the past models and because of this, we will use a much more complex dataset. The dataset that we will demonstrate this model on is the MNIST dataset which renders handwritten numbers 1-10 as 28x28 grids as heatmaps with each pixels value ranging from 0-1 denoting how "white" the pixel is. We will attempt to teach our model to classify these handwritten numbers even though some of the numbers are hard for even a human to classify. This will be done in the jupyter notebook in this file
