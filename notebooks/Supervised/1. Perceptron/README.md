@@ -16,7 +16,7 @@ $$\hat{y} = sign(z) = sign(w_1x_1 + w_2x_2 + ... + w_kx_k + b)$$
 
 The value of $\hat{y}$ is the prediction that is given by the Perceptron, however it is often wrong when untrained. In order to actually train our model, we must update the weights so that the model is more likely to predict correctly next time. This is how the Perceptron "Learns." The rule we utilize to do this is as follows
 
-$$\vec{w} \leftarrow \vec{w} + \eta (l - \hat{y})\vec{x}$$
+$$\vec{w} \leftarrow \vec{w} + \eta (l - \hat{y})\vec{x}$$ and $$b \leftarrow b + \eta(l - \hat{y})$$
 
 where $\vec{w}$ is the weight vector, $\eta$ is a chosen learning rate (we mostly used 0.5 in this class), $\vec{x}$ is the vector of the $x_i$ and $l$ is the correct value assigned to the label of the data point. Note that the closer that $l$ is to $\hat{y},$ the less the model needs to update itself. Because of this, with enough reasonable data, the model will tend towards being more and more accurate. This is how the Perceptron is able to learn specific datasets and use that to predict future data.
 
