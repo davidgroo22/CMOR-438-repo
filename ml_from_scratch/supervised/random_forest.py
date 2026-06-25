@@ -1,4 +1,4 @@
-from decision_tree import DecisionTree
+from ml_from_scratch.supervised.decision_tree import DecisionTree
 import numpy as np
 import pandas as pd
 from collections import Counter
