@@ -18,4 +18,4 @@ where $w_L, w_R$ are the fractions of data points in the parents that get sorted
 
 ## Example on Real Data
 
-We will once again utilize the Breast Cancer datasert from scikit-learn to test this algorithm. We will not need to scale it as we did with logistic regression because decision trees will only consider one feature at a time therefore every feature is considered equally, simply on what the most optimal information gain is. We will also attempt multiple different depths of trees to see how they effect performance.
+We will once again utilize the Breast Cancer dataset from scikit-learn to test this algorithm. We will not need to scale it as we did with logistic regression because decision trees will only consider one feature at a time therefore every feature is considered equally, simply on what the most optimal information gain is. We will also attempt multiple different depths of trees to see how they effect performance.
