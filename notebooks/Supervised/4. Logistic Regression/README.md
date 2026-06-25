@@ -10,11 +10,11 @@ Similar to the previous two algorithms, logistic regression begins with random w
 
 $$z = w_1x_1 + ... + w_kx_k + b$$
 
-one it does this, instead of passing it as a raw value like linear regression, it instead applies a function onto z called the sigmoid function which is defined so
+once it does this, instead of passing it as a raw value like linear regression, it instead applies a function onto z called the sigmoid function which is defined so
 
 $$\sigma(z) = \frac{1}{1+e^{-z}}$$
 
-This produces $\hat{y} = \sigma(z)$ or our prediction value. This value will be in between 0 and 1 and we interperet this value as a probability. More specifically, it is a probability that the datapoint belongs to a specific class that is denoted by $y.$ If $\hat{y} > 0.5$ we predict that $y =1$ and otherwise we predict that $y = 0.$ To train this model, we use a cost function called the binary cross-entropy cost function. This is denoted as
+This produces $\hat{y} = \sigma(z)$ or our prediction value. This value will be in between 0 and 1 and we interpret this value as a probability. More specifically, it is a probability that the datapoint belongs to a specific class that is denoted by $y.$ If $\hat{y} > 0.5$ we predict that $y =1$ and otherwise we predict that $y = 0.$ To train this model, we use a cost function called the binary cross-entropy cost function. This is denoted as
 
 $$C = -\frac{1}{n}\sum_{i=1}^{n}\left[y_i \log(\hat{y}_i) + (1 - y_i)\log(1 - \hat{y}_i)\right]$$
 
