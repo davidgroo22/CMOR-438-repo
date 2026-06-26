@@ -35,11 +35,12 @@ class DecisionTree():
         if num_samples>=self.min_samples_split and curr_depth<=self.max_depth:
             best_split = self.get_best_split(dataset, num_samples, num_features)
             
-            if best_split and best_split["info_gain"]>0:
-                left_subtree = self.build_tree(best_split["dataset_left"], curr_depth+1)
-                right_subtree = self.build_tree(best_split["dataset_right"], curr_depth+1)
+            if best_split:
+                if best_split["info_gain"]>0:
+                    left_subtree = self.build_tree(best_split["dataset_left"], curr_depth+1)
+                    right_subtree = self.build_tree(best_split["dataset_right"], curr_depth+1)
 
-                return Node(best_split["feature_index"], best_split["threshold"], 
+                    return Node(best_split["feature_index"], best_split["threshold"], 
                             left_subtree, right_subtree, best_split["info_gain"])
         
         # Returns a leaf node
