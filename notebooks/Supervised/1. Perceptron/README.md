@@ -22,6 +22,50 @@ where $\vec{w}$ is the weight vector, $\eta$ is a chosen learning rate (we mostl
 
 ---
 
+## A Note about Convergence of the Perceptron
+
+One issue with the perceptron is that it can only achieve 100% accuracy on data that is "linearly separable" or data in $\mathbb{R}^n$ such that we can draw a line in $\mathbb{R}^n$ that separates the classes. We will consider the proof of the **Perceptron Convergence Theorem** to show that:
+
+The perceptron converges to 100% accuracy $\iff$ the data it is trained on is linearly separable.
+
+Call $D = \{(\vec{x_i}, y_i)\}_{i=1}^n$ to be our dataset with $y_i = \pm 1$ for each $1 \leq i \leq n.$ Additionally we will say that $D$ is **linearly separable** if there exists a weight vector $\vec{w}'$ and bias $b'$ such that $y_i(\vec{w}' \dot (\vec{x_i},1)) > 0$ for each $x_i \in D.$ Additionally we will say that the perceptron converges to 100% accuracy if there is $k$ such that the $k$th weight and bias vectors, $\vec{w_k}, b_k$ satisfies $(\vec{w_k} \dot (\vec{x_i}, 1))y_i \geq 0$ for each i.
+
+First notice by these definitions that if the perceptron converges to 100% accuracy on step $k$ then we have that $D$ is linearly separable with $\vec{w}', b' = \vec{w_k}, b_k$ so we have thus shown that direction
+
+Now we suppose that the data is linearly separable and we are then given some $\vec{w}'$ that separates the data. Additionally we can normalize this vector such that $||\vec{w}'|| = 1$ (The Euclidean Norm). Additionally as $y_i(\vec{w}' \dot (\vec{x_i},1)) > 0$ we have $B$ such that
+
+$$y_i(\vec{w}' \dot (\vec{x_i},1)) > B$$
+
+for each of our finite datapoints. Call $\vec{w_k}$ the weight vector of our perceptron after $k$ updates then note that for some $x_i \in D$ we have that
+
+$$\vec{w_k} = \vec{w_{k-1}} + x_iy_i$$
+
+Additionally then dotting both sides we get
+
+$$\vec{w_k} \dot \vec{w}' = \vec{w_{k-1}} \dot \vec{w}' + B = \vec{w_{k-2}} \dot \vec{w'} + 2B = kB.$$
+
+Additionally then applying Cauchy-Schwarz we have $\vec{w_k} \dot \vec{w}' \leq ||\vec{w_k}|| || \vec{w}'|| = ||\vec{w_k}||$ thus we get
+
+$$kB \leq ||\vec{w_k}||$$
+
+Now, as $D$ is finite, take $R: ||\vec{x_i}|| \leq R$ for each $i.$ Note also that 
+
+$$||\vec{w_k}||^2 = ||\vec{w_{k-1}} + y_i\vec{x_i}||^2 = ||\vec{w_{k-1}}||^2 + 2y_i(\vec{w_{k-1} \dot \vec{x_i}}) + ||x_i||^2$$
+
+Note also that $2y_i(\vec{w_{k-1} \dot \vec{x_i}}) < 0$ because it is the twice the update step from a misclassified point, i.e. the algorithm wouldn't be updating if it were positive. Additionally as $||\vec{x_i}||^2 \leq R^2$ we then get that
+
+$$||\vec{w_k}||^2 \leq ||\vec{w_{k-1}}||^2 + R^2 \leq ||\vec{w_{k-2}}||^2 + 2R^2 \leq ... \leq kR^2$$
+
+From this, we have that 
+
+$$k^2B^2 \leq ||\vec{w_k}||^2 \leq kR^2 \implies k \leq \frac{R^2}{B^2}$$
+
+giving us that $k$ is bounded above. Because of this, the algorithm can only make $\lfloor \frac{R^2}{B^2} \rfloor$ updates before it converges, thus it converges in a finite number of steps. From this we have shown both directions and now can conclude that
+
+The perceptron converges to 100% accuracy $\iff$ the data it is trained on is linearly separable.
+
+---
+
 ## Examples on real Data
 
 Now in the Jupyter notebook included in this package, I will demonstrate this algorithm on two classifications in the iris dataset imported from Scikit-learn.
