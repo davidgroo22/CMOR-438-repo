@@ -14,4 +14,4 @@ to be our prediction. When one tree makes an strong error in one direction, its 
 
 ## Example on Real Data
 
-We will now test thi data on the breast cancer dataset that we tested the decision tree on. We will be able to then compare the results of the random forest and the decision tree which may give us insight on the benefits of one algorithm versus the other. We will do this in the jupyter notebook in this folder.
+We will now test this data on the breast cancer dataset that we tested the decision tree on. We will be able to then compare the results of the random forest and the decision tree which may give us insight on the benefits of one algorithm versus the other. We will do this in the jupyter notebook in this folder.

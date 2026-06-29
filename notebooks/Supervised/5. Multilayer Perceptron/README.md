@@ -1,6 +1,6 @@
 # The Multilayer Perceptron
 
-The Multilayer Perceptron is likely the most mathematically complex and generally the most powerful machine learning algorithms documented in this repository. The idea behind the multilayer perceptron is the following: Remember the normal perceptron has a certain amount of weights that it will apply to data, and then with those weights it outputs a value. The Multilayer Perceptron is similar except the value that it outputs is used as a weight for another perceptron. It is built layer by layer such that a layer of perceptrons turns a large dataset into a smaller one that will be passed onto the next layer of perceptrons. It uses these weighted sums of weighted sums to predict a specifc (often much more complex) dataset. Additionally, to train the model, we need to utilize techniques much more complicated than the perceptron update rule, as the weights in layer one effect the output values in layer n. Because of this we use a calculus-based technique called backpropogation to effectively update weights after training which will be explained below.
+The Multilayer Perceptron is likely the most mathematically complex and generally the most powerful machine learning algorithms documented in this repository. The idea behind the multilayer perceptron is the following: Remember the normal perceptron has a certain amount of weights that it will apply to data, and then with those weights it outputs a value. The Multilayer Perceptron is similar except the value that it outputs is used as a weight for another perceptron. It is built layer by layer such that a layer of perceptrons turns a large dataset into a smaller one that will be passed onto the next layer of perceptrons. It uses these weighted sums of weighted sums to predict a specific (often much more complex) dataset. Additionally, to train the model, we need to utilize techniques much more complicated than the perceptron update rule, as the weights in layer one effect the output values in layer n. Because of this we use a calculus-based technique called backpropogation to effectively update weights after training which will be explained below.
 
 ---
 
@@ -14,11 +14,11 @@ which will calculate a matrix that will be passed into the next layer. Now recal
 
 $$A_1 = \sigma(Z_1)$$ 
 
-Once we have done this, we pass $A_2$ into the next layer and repeat the exact same process but with a new set of weights and a smaller dimension. We repeat until we get to the output layer, where we calculate $Z_3$ (As we are looking at a model with four layers) and apply a new function called softmax to it such that
+Once we have done this, we pass $A_1$ into the next layer and repeat the exact same process but with a new set of weights and a smaller dimension. We repeat until we get to the output layer, where we calculate $Z_3$ (As we are looking at a model with four layers) and apply a new function called softmax to it such that
 
 $$\text{softmax}(z_i) = \frac{e^{z_i}}{\sum_j e^{z_j}}$$
 
-This scales $Z_1$ so each row adds up to 1, giving an accurate representation of the probabilities of each class in the output layer. We then choose the class based on the highest probability.
+This scales $Z_3$ so each row adds up to 1, giving an accurate representation of the probabilities of each class in the output layer. We then choose the class based on the highest probability.
 
 Now that we have effectively predicted the class of the data point, here is where the training step comes in. First recall the notion of the cost function, similarly to past models, we want to minimize this. The cost function that we use for the multilayer perceptron is
 
@@ -38,7 +38,7 @@ Note that $W_n, Z_n$ are defined above and the $\odot$ denotes elementwise multi
 
 $$\frac{\partial C}{\partial W_{n}} = \frac{1}{k} {A_{n-1}}^{T} \delta_{n}$$
 
-as well as taking the gradiant of the bias to be
+as well as taking the gradient of the bias to be
 
 $$\frac{\partial C}{\partial B_{n}} = \frac{1}{k}\sum_{datapoints} \delta_{n}$$
 
@@ -54,4 +54,4 @@ Once we have done this, we have effectively decreased the cost function as we ha
 
 ## Testing on real data
 
-This model is much more powerful than a lot of the past models and because of this, we will use a much more complex dataset. The dataset that we will demonstrate this model on is the MNIST dataset which renders handwritten numbers 1-10 as 28x28 grids as heatmaps with each pixels value ranging from 0-1 denoting how "white" the pixel is. We will attempt to teach our model to classify these handwritten numbers even though some of the numbers are hard for even a human to classify. This will be done in the jupyter notebook in this file
+This model is much more powerful than a lot of the past models and because of this, we will use a much more complex dataset. The dataset that we will demonstrate this model on is the MNIST dataset which renders handwritten numbers 0-9 as 28x28 grids as grayscale images with each pixels value ranging from 0-1 denoting how "white" the pixel is. We will attempt to teach our model to classify these handwritten numbers even though some of the numbers are hard for even a human to classify. This will be done in the jupyter notebook in this file
